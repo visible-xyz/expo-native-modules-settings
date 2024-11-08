@@ -1,0 +1,12 @@
+{
+  "platforms": ["ios", "android"],
+  "ios": {
+    "modules": ["NativeModulesSettingsModule"]
+  },
+  "android": {
+    "modules": [
+      "xyz.visible.visiblerentapp.NativeModulesSettingsModule",
+      "xyz.visible.rentappdev.NativeModulesSettingsModule"
+    ]
+  }
+}
