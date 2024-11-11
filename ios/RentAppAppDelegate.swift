@@ -1,6 +1,7 @@
 import ExpoModulesCore
 import RNAppsFlyer
 import React
+import RCTLinkingManager
 
 
 public class RentAppAppDelegate : ExpoAppDelegateSubscriber {
