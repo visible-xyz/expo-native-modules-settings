@@ -1,7 +1,8 @@
 {
   "platforms": ["ios", "android"],
   "ios": {
-    "modules": ["NativeModulesSettingsModule"]
+    "modules": ["NativeModulesSettingsModule"],
+    "appDelegateSubscribers": ["RentAppAppDelegate"]
   },
   "android": {
     "modules": [
