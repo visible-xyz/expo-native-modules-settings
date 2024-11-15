@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Access to native code and third-party libraries",
   "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "build": "expo-module build",
     "clean": "expo-module clean",
@@ -28,7 +28,9 @@
   "author": "Denys Maksymenko <denys@visible.xyz> (https://github.com/denmaksymenko)",
   "license": "MIT",
   "homepage": "https://github.com/visible-xyz/expo-native-modules-settings#readme",
-  "dependencies": {},
+  "dependencies": {
+    "expo-build-properties": "~0.12.3"
+  },
   "devDependencies": {
     "@types/react": "^18.0.25",
     "expo-module-scripts": "^3.5.2",
