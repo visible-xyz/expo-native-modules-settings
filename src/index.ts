@@ -1,4 +1,4 @@
-import NativeModulesSettingsModule from "./NativeModulesSettings";
+import NativeModulesSettings from "./NativeModulesSettings";
 
 // Get the native constant value.
-export const PI = NativeModulesSettingsModule.PI;
+export const PI = NativeModulesSettings.PI;
