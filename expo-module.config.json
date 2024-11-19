@@ -3,7 +3,7 @@
   "plugins": ["react-native-appsflyer", {}],
   "ios": {
     "modules": ["NativeModulesSettings"],
-    "appDelegateSubscribers": ["/ios/AppDelegate.swift"]
+    "appDelegateSubscribers": ["/ios/AppDelegate.h"]
   },
   "android": {
     "modules": ["xyz.visible.visiblerentapp.NativeModulesSettings", "xyz.visible.rentappdev.NativeModulesSettings"]
