@@ -1,7 +1,9 @@
 {
   "platforms": ["ios", "android"],
+  "plugins": ["react-native-appsflyer", {}],
   "ios": {
-    "modules": ["NativeModulesSettings"]
+    "modules": ["NativeModulesSettings"],
+    "appDelegateSubscribers": ["/ios/AppDelegate.m"]
   },
   "android": {
     "modules": ["xyz.visible.visiblerentapp.NativeModulesSettings", "xyz.visible.rentappdev.NativeModulesSettings"]
