@@ -45,5 +45,19 @@ android {
   	implementation project(':expo-modules-core')
 	}
 
+allprojects {
+ repositories {
+   mavenCentral()
+   mavenLocal()
+
+   maven {
+     url("https://maven.fpregistry.io/#/releases")
+   }
+   maven {
+     url("https://www.jitpack.io")
+   }
+   google()
+ }
+}
 }
 
