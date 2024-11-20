@@ -4,6 +4,6 @@
     "modules": ["NativeModulesSettings"]
   },
   "android": {
-    "modules": ["xyz.visible.visiblerentapp.NativeModulesSettings", "xyz.visible.rentappdev.NativeModulesSettings"]
+    "modules": ["xyz.visible.visiblerentapp.NativeModulesSettings"]
   }
 }
