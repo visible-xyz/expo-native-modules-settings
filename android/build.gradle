@@ -41,14 +41,6 @@ android {
     abortOnError false
   }
 
-	maven {
-  	url("https://maven.fpregistry.io/releases")
-	}
-	
-	maven {
-  	url("https://www.jitpack.io")
-	}
-
 	dependencies {
   	implementation project(':expo-modules-core')
 	}
