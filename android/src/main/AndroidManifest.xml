@@ -1,2 +1,5 @@
 <manifest>
+<meta-data
+    android:name="xyz.visible.rentappdev.CHANNEL_ID"
+    android:value="default_channel" />
 </manifest>

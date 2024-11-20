@@ -1,25 +1,34 @@
 package xyz.visible.visiblerentapp
 
+import android.content.Context
+import android.content.pm.PackageManager
+import android.content.pm.PackageManager.NameNotFoundException
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
+
 class NativeModulesSettings : Module() {
-  // Each module class must implement the definition function. The definition consists of components
-  // that describes the module's functionality and behavior.
-  // See https://docs.expo.dev/modules/module-api for more details about available components.
   override fun definition() = ModuleDefinition {
-    // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
-    // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
-    // The module will be accessible from `requireNativeModule('NativeModulesSettings')` in JavaScript.
     Name("NativeModulesSettings")
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants(
-      "PI" to Math.PI
-    )
+    Function("setChannelId") { packageName: String, channelId: String ->
+      setNotificationChannelId(packageName, channelId)
+    }
+  }
 
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
+  private fun setNotificationChannelId(packageName: String, channelId: String) {
+    val context: Context = appContext.reactContext.applicationContext
+    val packageManager: PackageManager = context.packageManager
 
+    try {
+      val appInfo = packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
+      val metaData = appInfo.metaData
+      if (metaData != null) {
+        metaData.putString("$packageName.CHANNEL_ID", channelId)
+      }
+
+    } catch (e: NameNotFoundException) {
+      e.printStackTrace()
+    }
   }
 }
