@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="xyz.visible.rentappdev">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 <application>
 <meta-data
     android:name="xyz.visible.rentappdev.CHANNEL_ID"
