@@ -1,11 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from "react-native";
 
-import * as NativeModulesSettings from 'native-modules-settings';
+import * as NativeModulesSettings from "native-modules-settings";
 
 export default function App() {
+  async function setupNotificationChannel() {
+    console.log(JSON.stringify(NativeModulesSettings, null, 4));
+    const result = await NativeModulesSettings.setChannelId("my_channel_id1");
+    console.log(result); // Logs success, error, or status message
+    console.log(NativeModulesSettings.getTheme()); // Logs success, error, or status message
+  }
   return (
     <View style={styles.container}>
-      <Text>{NativeModulesSettings.hello()}</Text>
+      <Text>{"NativeModulesSettings.setChannelId()"}</Text>
+      <Pressable onPress={setupNotificationChannel}>
+        <Text>RUN</Text>
+      </Pressable>
     </View>
   );
 }
@@ -13,8 +22,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

@@ -1,8 +1,8 @@
 package xyz.visible.visiblerentapp
 
-import android.content.Context
-import android.content.pm.PackageManager
-import android.content.pm.PackageManager.NameNotFoundException
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
@@ -11,27 +11,46 @@ class NativeModulesSettings : Module() {
   override fun definition() = ModuleDefinition {
     Name("NativeModulesSettings")
 
-    Function("setChannelId") { packageName: String, channelId: String ->
-      setNotificationChannelId(packageName, channelId)
+        Function("getTheme") {
+      return@Function "system"
     }
-  }
 
-  private fun setNotificationChannelId(packageName: String, channelId: String) {
+    Function("setChannelId") { channelId: String ->
+        val context = appContext.reactContext ?: return@Function "Context not available"
 
-    try {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val descriptionText = getString(R.string.channel_description)
-        val importance = NotificationManager.IMPORTANCE_HIGH
-        val mChannel = NotificationChannel(CHANNEL_ID, channelId, importance)
-        mChannel.description = descriptionText
-        // Register the channel with the system. You can't change the importance
-        // or other notification behaviors after this.
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(mChannel)
+        return@Function try {
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationManager =
+                    context.getSystemService(NotificationManager::class.java)
+
+            if (notificationManager == null) {
+              return@Function "NotificationManager not available"
+            }
+
+            // Check if the channel already exists
+            val existingChannel = notificationManager.getNotificationChannel(channelId)
+
+            if (existingChannel == null) {
+              // Create a new notification channel with default settings
+              val channelName = "Default Channel"
+              val channelDescription = "Default notification channel"
+              val importance = NotificationManager.IMPORTANCE_HIGH
+              
+
+              val channel = NotificationChannel(channelId, channelName, importance).apply {
+                description = channelDescription
+              }
+              notificationManager.createNotificationChannel(channel)
+              return@Function "Channel created successfully"
+            } else {
+              return@Function "Channel already exists"
+            }
+          } else {
+            return@Function "Push notification channels are not supported on this Android version"
+          }
+        } catch (e: Exception) {
+          "Error: ${e.message}"
+        }
       }
-
-    } catch (e: NameNotFoundException) {
-      e.printStackTrace()
     }
   }
-}
