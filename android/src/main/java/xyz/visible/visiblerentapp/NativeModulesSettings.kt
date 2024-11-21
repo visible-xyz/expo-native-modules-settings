@@ -17,14 +17,17 @@ class NativeModulesSettings : Module() {
   }
 
   private fun setNotificationChannelId(packageName: String, channelId: String) {
-    val context: Context = appContext.reactContext.applicationContext
-    val packageManager: PackageManager = context.packageManager
 
     try {
-      val appInfo = packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
-      val metaData = appInfo.metaData
-      if (metaData != null) {
-        metaData.putString("$packageName.CHANNEL_ID", channelId)
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val descriptionText = getString(R.string.channel_description)
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val mChannel = NotificationChannel(CHANNEL_ID, channelId, importance)
+        mChannel.description = descriptionText
+        // Register the channel with the system. You can't change the importance
+        // or other notification behaviors after this.
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(mChannel)
       }
 
     } catch (e: NameNotFoundException) {
